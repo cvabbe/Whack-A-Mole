@@ -1,0 +1,98 @@
+<html>
+	<head>
+    	<title>Whack-A-Mole</title>
+        <style>
+            body {
+                background-color: black;
+                color: yellow;
+                font-family: Arial;
+            }
+            
+            #playingField {
+                background-color: #F6F6F6;
+                border: 3px solid yellow;
+                width: 900px;
+                height: 575px;
+                position: relative;
+                margin: 0 auto;
+            }
+            
+            #playingField:hover {
+                cursor: url(mole.png);
+            }
+            
+            #mole {
+                width: 135px;
+                height: 78px;
+                display: none;
+                position: absolute;
+            }
+            
+            p {
+                color: red;
+            }
+        </style>    
+    </head>
+    <body>
+        
+        <h1>How fast can you whack that mole?</h1>
+        <p id="time">.</p>
+        <p id="record">Your fastest try is: <span id="fastestTime"></span></p>
+        <p>Number of hits: <span id="clicks">0</span></p>
+        <div id="playingField">
+            <img id="mole" src="mole.png">
+        </div>
+        
+        <script type="text/javascript">
+            
+            var start = new Date().getTime();
+            
+            function setMole() {
+                
+                        
+                var top = Math.random() * 450;
+                var left = Math.random() * 750;
+                                    
+                document.getElementById("mole").style.top = top;
+                document.getElementById("mole").style.left = left;
+                document.getElementById("mole").style.display = "block";
+                
+                start = new Date().getTime();
+                
+            }
+            
+            function afterDelay() {
+                setTimeout(setMole, Math.random() * 1500);
+            }
+            
+            afterDelay();
+            
+            document.getElementById("mole").onclick = function() {
+                document.getElementById("mole").style.display = "none";
+                
+                var end = new Date().getTime();
+                
+                var timeTaken = (end - start) / 1000;
+                
+                var fastestTime = 0;
+                fastestTime = timeTaken;
+                
+                if (timeTaken < fastestTime) {
+                    document.getElementById("fastestTime").innerHTML = timeTaken;  
+                } else {
+                    document.getElementById("fastestTime").innerHTML = fastestTime;
+                }            
+                
+                var clicks = 0;
+                clicks += 1;
+                        
+                document.getElementById("clicks").innerHTML = clicks;                               
+                document.getElementById("time").innerHTML = "That took you: " + timeTaken + " seconds!";
+                
+                
+                afterDelay();
+            }
+              
+      	</script>
+    </body>
+</html
